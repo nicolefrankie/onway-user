@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String name = "nicole";
+  String name = "Nicole";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
         automaticallyImplyLeading: false,
         backgroundColor: const Color.fromARGB(255, 229, 104, 104),
         title: Text(
-          'Welcome' +  name + "!",
+          'Welcome ' +  name + "!",
           style: GoogleFonts.montserrat(
             fontSize: 22,
             fontWeight: FontWeight.bold,
@@ -62,41 +62,44 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           const SizedBox(width: 35),
-          InkWell(
-            onTap: () {
-            showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: const Text('Log Out'),
-                          content: const Text('Do you want to Log Out?'),
-                          actions: <Widget>[
-                            TextButton(
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: const Text('Cancel'),
-                            ),
-                            TextButton(
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const SignIn(),
-                                  ),
-                                );
-                              },
-                              child: const Text('Log Out'),
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  },
-            child: const Icon(
-              FontAwesomeIcons.powerOff,
-              color: Colors.black,
-              size: 22,
+          Padding(
+            padding: EdgeInsets.only(right: 20),
+            child: InkWell(
+              onTap: () {
+              showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('Log Out'),
+                            content: const Text('Do you want to Log Out?'),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const SignIn(),
+                                    ),
+                                  );
+                                },
+                                child: const Text('Log Out'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+              child: const Icon(
+                FontAwesomeIcons.powerOff,
+                color: Colors.black,
+                size: 22,
+              ),
             ),
           ),
         ],

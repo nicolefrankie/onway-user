@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:onway_user/Pages/UserPages/PabiliPages/checkout.dart';
 import 'package:onway_user/Pages/UserPages/PabiliPages/history_page.dart';
 import 'package:onway_user/Pages/UserPages/home_page.dart';
-import 'package:onway_user/components/google_maps.dart';
+import 'package:onway_user/pages/UserPages/PabiliPages/track_book.dart';
 
 class PabiliHomePage extends StatefulWidget {
   const PabiliHomePage({super.key});
@@ -16,9 +15,8 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
     List<Container> containers = [];
 
   final TextEditingController _textEditingController = TextEditingController();
-  final TextEditingController _estimatedPriceController =
-      TextEditingController();
-        final TextEditingController _shopLocationController = TextEditingController();
+  final TextEditingController _estimatedPriceController = TextEditingController();
+  final TextEditingController _shopLocationController = TextEditingController();
   final TextEditingController _userLocationController = TextEditingController();
 
   // ignore: unused_field
@@ -76,6 +74,7 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
             const SizedBox(
               height: 20,
             ),
+            //Ability to search the store and user location
             Row(
               children: [
                 Expanded(
@@ -83,7 +82,7 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0, right: 10),
-                        child: Container(
+                        child: SizedBox(
                           width: double.infinity,
                           child: TextFormField(
                             controller: _shopLocationController,
@@ -99,13 +98,13 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
                               ),
                             ),
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const GoogleMapsLocator(),
-                                ),
-                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) =>
+                              //         const GoogleMapsLocator(),
+                              //   ),
+                              // );
                             },
                           ),
                         ),
@@ -117,6 +116,7 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
                         padding: const EdgeInsets.only(left: 10.0, right: 10),
                         child: TextFormField(
                           controller: _userLocationController,
+                          readOnly: true,
                           decoration: InputDecoration(
                             hintText: 'Destination',
                             prefixIcon: const Icon(
@@ -127,9 +127,15 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
-                          // onChanged: (value) {
-                          //   print(value);
-                          // },
+                          onTap: () {
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) =>
+                              //         const GoogleMapsLocator(),
+                              //   ),
+                              // );
+                            },
                         ),
                       ),
                     ],
@@ -137,8 +143,6 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
                 ),
               ],
             ),
-            //or i would place the pabili info in here and add a seperate page for google maps
-            //Google Maps...
             const SizedBox(
               height: 30,
             ),
@@ -416,12 +420,12 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
                         } else {
                           // The estimated price is valid
                           // Do something with the estimated price, e.g. save it to a database or display it to the user
-                          showModalBottomSheet(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return const PabiliCheckoutPage();
-                            },
-                          );
+                          Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const PabiliTrackBookingPage(),
+                          ),
+                        );
                         }
                       },
                       style: ElevatedButton.styleFrom(

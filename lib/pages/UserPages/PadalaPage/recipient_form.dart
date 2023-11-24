@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'package:onway_user/Pages/UserPages/PadalaPage/padala_info.dart';
+import 'package:onway_user/pages/UserPages/PadalaPage/padala_page.dart';
 
 class RecipientForm extends StatefulWidget {
   const RecipientForm({Key? key}) : super(key: key);
@@ -178,7 +177,7 @@ class _RecipientFormState extends State<RecipientForm> {
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                const PadalaPurchaseInformation(),
+                                const PadalaHomePage(),
                           ),
                         );
                       } else {
