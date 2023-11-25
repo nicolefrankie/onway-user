@@ -6,6 +6,7 @@ import 'package:onway_user/Pages/UserPages/PadalaPage/history_page.dart';
 import 'package:onway_user/components/google_maps.dart';
 import 'package:onway_user/pages/UserPages/PadalaPage/confirmation.dart';
 import 'package:onway_user/pages/UserPages/PadalaPage/recipient_form.dart';
+import 'package:onway_user/pages/UserPages/home_page.dart';
 
 class PadalaHomePage extends StatefulWidget {
   const PadalaHomePage({super.key});
@@ -21,7 +22,7 @@ class _PadalaHomePageState extends State<PadalaHomePage> {
 
   // ignore: unused_field
   int _characterCount = 0;
-  final int _maxCharacterCount = 130;
+  final int _maxCharacterCount = 90;
 
   String? _selectedVehicle;
   String? _itemType;
@@ -38,8 +39,7 @@ class _PadalaHomePageState extends State<PadalaHomePage> {
     'Electronics',
     'Others',
   ];
-
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +48,12 @@ class _PadalaHomePageState extends State<PadalaHomePage> {
         backgroundColor: const Color.fromARGB(255, 229, 104, 104),
         leading: IconButton(
           onPressed: () {
-            Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const HomePage(),
+                ),
+              );
           },
           icon: const Icon(
             Icons.arrow_back_ios_rounded,
@@ -107,32 +112,29 @@ class _PadalaHomePageState extends State<PadalaHomePage> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 10.0, right: 10),
-                        child: SizedBox(
-                          width: double.infinity,
-                          child: TextFormField(
-                            controller: _destinationController,
-                            readOnly: true,
-                            decoration: InputDecoration(
-                              hintText: 'Search Store location',
-                              prefixIcon: const Icon(
-                                Icons.store,
-                                color: Color(0xFFE37E7E), // Custom icon color
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                              ),
+                        padding: const EdgeInsets.only(left: 10.0, right: 10, top: 20),
+                        child: TextFormField(
+                          controller: _destinationController,
+                          readOnly: true,
+                          decoration: InputDecoration(
+                            hintText: 'Search destination location',
+                            prefixIcon: const Icon(
+                              Icons.location_on,
+                              color: Color(0xFFE37E7E),
                             ),
-                            onTap: () {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) =>
-                              //         const GoogleMapsLocator(),
-                              //   ),
-                              // );
-                            },
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const GoogleMapsLocator(),
+                              ),
+                            );
+                          },
                         ),
                       ),
                       const SizedBox(
@@ -154,14 +156,14 @@ class _PadalaHomePageState extends State<PadalaHomePage> {
                             ),
                           ),
                           onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const GoogleMapsLocator(),
-                                ),
-                              );
-                            },
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const GoogleMapsLocator(),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ],
@@ -434,7 +436,7 @@ class _PadalaHomePageState extends State<PadalaHomePage> {
                     TextField(
                       controller: _textEditingController,
                       maxLength: _maxCharacterCount,
-                      maxLines: 5,
+                      maxLines: 4,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
@@ -466,7 +468,8 @@ class _PadalaHomePageState extends State<PadalaHomePage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const PadalaConfirmation(),
+                            builder: (context) =>
+                                const PadalaConfirmation(),
                           ),
                         );
                       },
@@ -493,8 +496,7 @@ class _PadalaHomePageState extends State<PadalaHomePage> {
               ),
           ],
         ),
-        ),
-        
+        ),  
       ),
     );
   }

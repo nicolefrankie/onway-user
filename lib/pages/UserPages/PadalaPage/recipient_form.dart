@@ -123,44 +123,6 @@ class _RecipientFormState extends State<RecipientForm> {
                   },
                 ),
                 const SizedBox(
-                  height: 20,
-                ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Address:',
-                    style: GoogleFonts.notoSans(
-                      fontSize: 16,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-                TextFormField(
-                  keyboardType: TextInputType.phone,
-                  decoration: InputDecoration(
-                    hintText: 'Enter the address',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(color: Colors.white),
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Contact number is required.';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    setState(() {
-                      _name = value!;
-                    });
-                  },
-                ),
-                const SizedBox(
                   height: 30,
                 ),
                 ElevatedButton(
@@ -168,11 +130,6 @@ class _RecipientFormState extends State<RecipientForm> {
                     final form = _formKey.currentState;
                     if (form != null) {
                       if (form.validate()) {
-                        // All fields are valid, proceed with saving the recipient's information.
-                        // You can access the form values using _name, _contactNumber, _address.
-                        // For now, let's just print them to the console.
-
-                        // You can navigate to the next screen here if needed.
                         Navigator.push(
                           context,
                           MaterialPageRoute(

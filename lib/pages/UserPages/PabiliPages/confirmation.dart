@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:onway_user/pages/UserPages/PadalaPage/track_booking.dart';
+import 'package:onway_user/pages/UserPages/PabiliPages/track_book.dart';
 
-class PadalaConfirmation extends StatefulWidget {
-  const PadalaConfirmation({super.key});
+class PabiliConfirmation extends StatefulWidget {
+  const PabiliConfirmation({super.key});
 
   @override
-  State<PadalaConfirmation> createState() => _PadalaConfirmationState();
+  State<PabiliConfirmation> createState() => _PabiliConfirmationState();
 }
 
-class _PadalaConfirmationState extends State<PadalaConfirmation> {
-  GoogleMapController? _mapController;
-
+class _PabiliConfirmationState extends State<PabiliConfirmation> {
   @override
   Widget build(BuildContext context) {
+    GoogleMapController? _mapController;
+    
     return Scaffold(
       body: Stack(
         children: [
@@ -33,8 +33,6 @@ class _PadalaConfirmationState extends State<PadalaConfirmation> {
               zoomControlsEnabled: false,
             ),
           ),
-
-          // Other Widgets Overlaying the Map
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -89,7 +87,7 @@ class _PadalaConfirmationState extends State<PadalaConfirmation> {
                 const SizedBox(
                   height: 350,
                 ),
-                // Recipient Details
+                // Item Details
                 Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(
@@ -112,7 +110,7 @@ class _PadalaConfirmationState extends State<PadalaConfirmation> {
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              "Recipient Details",
+                              "Pabili Items:",
                               style: GoogleFonts.notoSans(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
@@ -123,29 +121,13 @@ class _PadalaConfirmationState extends State<PadalaConfirmation> {
                           const SizedBox(
                             height: 10,
                           ),
+                          //the user's pabili must display here
                           Align(
                             alignment: Alignment.topLeft,
                             child: Padding(
                               padding: const EdgeInsets.only(left: 20),
                               child: Text(
-                                "Name: ",
-                                style: GoogleFonts.notoSans(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: Text(
-                                "Contact Number: ",
+                                "Quanity and Item",
                                 style: GoogleFonts.notoSans(
                                   fontSize: 11,
                                   fontWeight: FontWeight.normal,
@@ -229,7 +211,7 @@ class _PadalaConfirmationState extends State<PadalaConfirmation> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            const PadalaTrackBookingPage(),
+                                            const PabiliTrackBookingPage(),
                                       ),
                                     );
                                   },

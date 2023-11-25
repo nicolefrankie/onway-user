@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:onway_user/Pages/UserPages/PabiliPages/history_page.dart';
 import 'package:onway_user/Pages/UserPages/home_page.dart';
-import 'package:onway_user/pages/UserPages/PabiliPages/track_book.dart';
+import 'package:onway_user/components/google_maps.dart';
+import 'package:onway_user/pages/UserPages/PabiliPages/deliver_confirm.dart';
 
 class PabiliHomePage extends StatefulWidget {
   const PabiliHomePage({super.key});
@@ -21,7 +22,7 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
 
   // ignore: unused_field
   int _characterCount = 0;
-  final int _maxCharacterCount = 130;
+  final int _maxCharacterCount = 90;
 
 
   @override
@@ -71,9 +72,6 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(
-              height: 20,
-            ),
             //Ability to search the store and user location
             Row(
               children: [
@@ -81,7 +79,7 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 10.0, right: 10),
+                        padding: const EdgeInsets.only(left: 10.0, right: 10, top: 20),
                         child: SizedBox(
                           width: double.infinity,
                           child: TextFormField(
@@ -98,13 +96,13 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
                               ),
                             ),
                             onTap: () {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) =>
-                              //         const GoogleMapsLocator(),
-                              //   ),
-                              // );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const GoogleMapsLocator(),
+                                ),
+                              );
                             },
                           ),
                         ),
@@ -128,13 +126,13 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
                             ),
                           ),
                           onTap: () {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) =>
-                              //         const GoogleMapsLocator(),
-                              //   ),
-                              // );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const GoogleMapsLocator(),
+                                ),
+                              );
                             },
                         ),
                       ),
@@ -334,7 +332,7 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
                     TextField(
                       controller: _textEditingController,
                       maxLength: _maxCharacterCount,
-                      maxLines: 5,
+                      maxLines: 4,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10.0),
@@ -423,7 +421,7 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
                           Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const PabiliTrackBookingPage(),
+                            builder: (context) => const DeliveryConfirmation(),
                           ),
                         );
                         }
