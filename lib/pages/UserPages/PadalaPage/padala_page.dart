@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'package:onway_user/Pages/UserPages/PadalaPage/history_page.dart';
-import 'package:onway_user/components/google_maps.dart';
+import 'package:onway_user/components/search_places.dart';
 import 'package:onway_user/pages/UserPages/PadalaPage/confirmation.dart';
 import 'package:onway_user/pages/UserPages/PadalaPage/recipient_form.dart';
 import 'package:onway_user/pages/UserPages/home_page.dart';
@@ -127,14 +127,14 @@ class _PadalaHomePageState extends State<PadalaHomePage> {
                             ),
                           ),
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const GoogleMapsLocator(),
-                              ),
-                            );
-                          },
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      SearchPlacesPage( locationController: _destinationController,),
+                                ),
+                              );
+                            },
                         ),
                       ),
                       const SizedBox(
@@ -156,14 +156,14 @@ class _PadalaHomePageState extends State<PadalaHomePage> {
                             ),
                           ),
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const GoogleMapsLocator(),
-                              ),
-                            );
-                          },
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      SearchPlacesPage( locationController: _userLocationController,),
+                                ),
+                              );
+                            },
                         ),
                       ),
                     ],

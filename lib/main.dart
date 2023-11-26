@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:onway_user/Controller/location_controller.dart';
 import 'package:onway_user/pages/welcome_page.dart';
 
 void main() {
@@ -12,7 +11,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(LocationController());
     return GetMaterialApp(
       title: 'OnWay',
       theme: ThemeData(

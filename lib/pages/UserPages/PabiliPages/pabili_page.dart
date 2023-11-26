@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:onway_user/Pages/UserPages/PabiliPages/history_page.dart';
 import 'package:onway_user/Pages/UserPages/home_page.dart';
-import 'package:onway_user/components/google_maps.dart';
+import 'package:onway_user/components/search_places.dart';
 import 'package:onway_user/pages/UserPages/PabiliPages/deliver_confirm.dart';
 
 class PabiliHomePage extends StatefulWidget {
@@ -15,7 +15,7 @@ class PabiliHomePage extends StatefulWidget {
 class _PabiliHomePageState extends State<PabiliHomePage> {
     List<Container> containers = [];
 
-  final TextEditingController _textEditingController = TextEditingController();
+  final TextEditingController _instructionController = TextEditingController();
   final TextEditingController _estimatedPriceController = TextEditingController();
   final TextEditingController _shopLocationController = TextEditingController();
   final TextEditingController _userLocationController = TextEditingController();
@@ -100,7 +100,7 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      const GoogleMapsLocator(),
+                                      SearchPlacesPage( locationController: _shopLocationController,),
                                 ),
                               );
                             },
@@ -130,7 +130,7 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) =>
-                                      const GoogleMapsLocator(),
+                                      SearchPlacesPage( locationController: _userLocationController,),
                                 ),
                               );
                             },
@@ -330,7 +330,7 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
                 child: Column(
                   children: [
                     TextField(
-                      controller: _textEditingController,
+                      controller: _instructionController,
                       maxLength: _maxCharacterCount,
                       maxLines: 4,
                       decoration: InputDecoration(
@@ -400,6 +400,7 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
                     const SizedBox(
                       height: 20,
                     ),
+                    
                     ElevatedButton(
                       onPressed: () {
                         // Validate the estimated price

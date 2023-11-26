@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -11,7 +13,7 @@ class PabiliTrackBookingPage extends StatefulWidget {
 }
 
 class _PabiliTrackBookingPageState extends State<PabiliTrackBookingPage> {
-  GoogleMapController? _mapController;
+  final Completer<GoogleMapController> _mapController = Completer();
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +23,12 @@ class _PabiliTrackBookingPageState extends State<PabiliTrackBookingPage> {
           // Google Maps Widget as the background
           Expanded(
             child: GoogleMap(
-              onMapCreated: (controller) {
-                setState(() {
-                  _mapController = controller;
-                });
+              onMapCreated:
+                (GoogleMapController controller) {
+                _mapController.complete(controller);
               },
               initialCameraPosition: CameraPosition(
-                target: LatLng(37.7749, -122.4194), // Initial map location (San Francisco, CA)
+                target: LatLng(37.7749, -122.4194), 
                 zoom: 12,
               ),
               zoomControlsEnabled: false,
@@ -63,7 +64,7 @@ class _PabiliTrackBookingPageState extends State<PabiliTrackBookingPage> {
                         child: Text(
                           "Store Location",
                           style: GoogleFonts.notoSans(
-                            fontSize: 16,
+                            fontSize: 14,
                             fontWeight: FontWeight.w600,
                             color: Colors.black,
                           ),
@@ -77,7 +78,7 @@ class _PabiliTrackBookingPageState extends State<PabiliTrackBookingPage> {
                         child: Text(
                           "User Location",
                           style: GoogleFonts.notoSans(
-                            fontSize: 16,
+                            fontSize: 14,
                             fontWeight: FontWeight.w600,
                             color: Colors.black,
                           ),
@@ -87,106 +88,7 @@ class _PabiliTrackBookingPageState extends State<PabiliTrackBookingPage> {
                   ),
                 ),
                 const SizedBox(
-                  height: 350,
-                ),
-                // Recipient Details
-                Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 10),
-                      padding: const EdgeInsets.all(20),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 6,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        children: [
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Pabili Items:",
-                              style: GoogleFonts.notoSans(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          //the user's pabili must display here
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: Text(
-                                "Quanity and Item",
-                                style: GoogleFonts.notoSans(
-                                  fontSize: 11,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Instruction: ",
-                              style: GoogleFonts.notoSans(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Delivery Fee: ",
-                              style: GoogleFonts.notoSans(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              "Kilometers: ",
-                              style: GoogleFonts.notoSans(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-
-                const SizedBox(
-                  height: 10,
+                  height: 400,
                 ),
                 Padding(
                 padding: const EdgeInsets.only(bottom: 30, left: 10, right: 10),
