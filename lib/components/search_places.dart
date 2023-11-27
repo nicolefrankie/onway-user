@@ -130,7 +130,6 @@ class _SearchPlacesPageState extends State<SearchPlacesPage> {
                     ),
                   ),
                 ),
-
               ],
             ),
             Expanded(
