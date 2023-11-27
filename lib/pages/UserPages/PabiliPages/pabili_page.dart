@@ -34,6 +34,39 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
   int _characterCount = 0;
   final int _maxCharacterCount = 90;
 
+  bool addSchedule = false;
+  DateTime selectedDate = DateTime.now();
+  TimeOfDay selectedTime = TimeOfDay.now();
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2101),
+    );
+
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+      });
+    }
+  }
+
+  Future<void> _selectTime(BuildContext context) async {
+    final TimeOfDay? picked = await showTimePicker(
+      context: context,
+      initialTime: selectedTime,
+    );
+
+    if (picked != null && picked != selectedTime) {
+      setState(() {
+        selectedTime = picked;
+      });
+    }
+  }
+
+
   @override
   void dispose() {
     itemController.dispose();
@@ -438,7 +471,116 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
                     const SizedBox(
                       height: 20,
                     ),
-                    
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        "Do you want to set schedule?",
+                        style: GoogleFonts.amiko(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        Radio(
+                          value: true,
+                          groupValue: addSchedule,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              addSchedule = value!;
+                            });
+                          },
+                        ),
+                        Text(
+                          'Yes',
+                          style: GoogleFonts.openSans(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Radio(
+                          value: false,
+                          groupValue: addSchedule,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              addSchedule = value!;
+                            });
+                          },
+                        ),
+                        Text(
+                          'No',
+                          style: GoogleFonts.openSans(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          ),
+                      ],
+                    ),
+                    if (addSchedule)
+                      Column(
+                        children: [
+                          ElevatedButton(
+                            onPressed: () => _selectDate(context),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFFEDEDED),
+                              foregroundColor: const Color.fromARGB(223, 255, 53, 53),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 5),
+                            ),
+                            child: Text(
+                              'Select Date',
+                              style: GoogleFonts.amiko(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 16),
+                          ElevatedButton(
+                            onPressed: () => _selectTime(context),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFFEDEDED),
+                              foregroundColor: const Color.fromARGB(223, 255, 53, 53),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 5),
+                            ),
+                            child: Text(
+                              'Select Time',
+                              style: GoogleFonts.amiko(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              ),
+                          ),
+                          SizedBox(height: 16),
+                          Text(
+                            'Selected Date: ${selectedDate.toLocal()}',
+                            style: GoogleFonts.amiko(
+                              fontSize: 14,
+                              color: Colors.black,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            'Selected Time: ${selectedTime.format(context)}',
+                            style: GoogleFonts.amiko(
+                              fontSize: 14,
+                              color: Colors.black,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ],
+                      ),
+
                     ElevatedButton(
                       onPressed: () {
                         // Validate the estimated price

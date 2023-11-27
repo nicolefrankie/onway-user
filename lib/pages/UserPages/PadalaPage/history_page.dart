@@ -25,7 +25,7 @@ class _HistoryPadalaPageState extends State<HistoryPadalaPage> {
           ),
         ),
         title: Text(
-          'Order History',
+          'Delivery History',
           style: GoogleFonts.montserrat(
               fontSize: 20, fontWeight: FontWeight.w500, color: Colors.black),
         ),

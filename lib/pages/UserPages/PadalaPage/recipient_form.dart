@@ -15,8 +15,6 @@ class _RecipientFormState extends State<RecipientForm> {
   String _name = '';
   // ignore: unused_field
   final String _contactNumber = '';
-  // ignore: unused_field
-  final String _address = '';
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +61,7 @@ class _RecipientFormState extends State<RecipientForm> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(
-                    hintText: 'Enter the recipient name',
+                    hintText: 'Enter recipient name',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -101,7 +99,7 @@ class _RecipientFormState extends State<RecipientForm> {
                 TextFormField(
                   keyboardType: TextInputType.phone,
                   decoration: InputDecoration(
-                    hintText: 'Enter the contact number',
+                    hintText: 'Enter contact number',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),

@@ -25,7 +25,7 @@ class _HistoryItemPageState extends State<HistoryItemPage> {
           ),
         ),
         title: Text(
-          'Order History',
+          'Delivery History',
           style: GoogleFonts.montserrat(
               fontSize: 20, fontWeight: FontWeight.w500, color: Colors.black),
         ),
@@ -51,9 +51,10 @@ class _HistoryItemPageState extends State<HistoryItemPage> {
               const Text(
                 'All your items are here!',
                 style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black),
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black
+                ),
               ),
             ],
           ),

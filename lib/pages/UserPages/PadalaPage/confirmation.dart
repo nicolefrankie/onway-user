@@ -69,13 +69,11 @@ class _PadalaConfirmationState extends State<PadalaConfirmation> {
                 const Divider(
                   color: Colors.grey,
                   thickness: 1,
-                ),
-                
-                
+                ),       
                 Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 20),
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 20),
                     child: Text(
                       "Recipient Name: ",
                       style: GoogleFonts.notoSans(
@@ -88,7 +86,8 @@ class _PadalaConfirmationState extends State<PadalaConfirmation> {
                 ),
                 const SizedBox(
                   height: 20,
-                ),Align(
+                ),
+                Align(
                 alignment: Alignment.topLeft,
                 child: Padding(
                   padding: const EdgeInsets.only(left: 20),

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:onway_user/pages/UserPages/PadalaPage/padala_page.dart';
 import 'package:onway_user/pages/UserPages/home_page.dart';
 
 class PadalaTrackBookingPage extends StatefulWidget {
@@ -48,34 +49,6 @@ class _PadalaTrackBookingPageState extends State<PadalaTrackBookingPage> {
       setState(() {});
     }
   }
-
-  // LocationData? currentLocation;
-  // void getCurrentLocation() async {
-  //     Location location = Location();
-  // location.getLocation().then(
-  //       (location) {
-  //         currentLocation = location;
-  //       },
-  //     );
-  // GoogleMapController googleMapController = await _controller.future;
-  // location.onLocationChanged.listen(
-  //       (newLoc) {
-  //         currentLocation = newLoc;
-  // googleMapController.animateCamera(
-  //           CameraUpdate.newCameraPosition(
-  //             CameraPosition(
-  //               zoom: 13.5,
-  //               target: LatLng(
-  //                 newLoc.latitude!,
-  //                 newLoc.longitude!,
-  //               ),
-  //             ),
-  //           ),
-  //         );
-  // setState(() {});
-  //       },
-  //     );
-  //   }
 
   @override
   Widget build(BuildContext context) {
@@ -181,11 +154,40 @@ class _PadalaTrackBookingPageState extends State<PadalaTrackBookingPage> {
                             children: [
                               ElevatedButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const HomePage(),
-                                    ),
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: const Text('Package Received'),
+                                        content: const Text('The recipient has already received the package!'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const PadalaHomePage(),
+                                                ),
+                                              );
+                                            },
+                                            child: const Text('Book Deliver'),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const HomePage(),
+                                                ),
+                                              );
+                                            },
+                                            child: const Text('Go Home'),
+                                          ),
+                                        ],
+                                      );
+                                    },
                                   );
                                 },
                                 style: ElevatedButton.styleFrom(
