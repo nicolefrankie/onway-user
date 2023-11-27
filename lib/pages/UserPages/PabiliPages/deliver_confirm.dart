@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:onway_user/pages/UserPages/PabiliPages/pabili_page.dart';
 import 'package:onway_user/pages/UserPages/PabiliPages/track_book.dart';
 
 class DeliveryConfirmation extends StatefulWidget {
-  const DeliveryConfirmation({super.key});
+  final List<PabiliItem> pabiliItems;
+  final TextEditingController instructionController;
+
+  const DeliveryConfirmation({super.key, required this.pabiliItems, required this.instructionController,});
 
   @override
   State<DeliveryConfirmation> createState() => _DeliveryConfirmationState();
@@ -25,7 +29,7 @@ class _DeliveryConfirmationState extends State<DeliveryConfirmation> {
           ),
         ),
         title: Text(
-          'Order COnfirmation',
+          'Order Confirmation',
           style: GoogleFonts.montserrat(
             fontSize: 20,
             fontWeight: FontWeight.w500,
@@ -69,28 +73,50 @@ class _DeliveryConfirmationState extends State<DeliveryConfirmation> {
                   color: Colors.grey,
                   thickness: 1,
                 ),
-                //the user's pabili must display here
                 Align(
                 alignment: Alignment.topLeft,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                    child: Text(
-                      "Quanity and Item",
-                      style: GoogleFonts.notoSans(
-                        fontSize: 11,
-                        fontWeight: FontWeight.normal,
-                        color: Colors.black,
-                      ),
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Items:",
+                          style: GoogleFonts.notoSans(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(height: 5,),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: widget.pabiliItems.length,
+                          itemBuilder: (context, index) {
+                            PabiliItem item = widget.pabiliItems[index];
+                            return Text(
+                              "${item.quantity}x ${item.itemName}",
+                              style: GoogleFonts.notoSans(
+                                fontSize: 14,
+                                fontWeight: FontWeight.normal,
+                                color: Colors.black,
+                              ),
+                            );
+                          },
+                        ),
+                      ],
                     ),
                   ),
                 ),
+                
                 const SizedBox(
                   height: 20,
                 ),
                 Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    "Instruction: ",
+                    "Instruction: ${widget.instructionController.text}",
                     style: GoogleFonts.notoSans(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,

@@ -5,6 +5,13 @@ import 'package:onway_user/Pages/UserPages/home_page.dart';
 import 'package:onway_user/components/search_places.dart';
 import 'package:onway_user/pages/UserPages/PabiliPages/deliver_confirm.dart';
 
+class PabiliItem {
+  String itemName;
+  int quantity;
+
+  PabiliItem({required this.itemName, required this.quantity});
+}
+
 class PabiliHomePage extends StatefulWidget {
   const PabiliHomePage({super.key});
 
@@ -13,16 +20,30 @@ class PabiliHomePage extends StatefulWidget {
 }
 
 class _PabiliHomePageState extends State<PabiliHomePage> {
-    List<Container> containers = [];
+  List<Container> containers = [];
+  List<PabiliItem> pabiliItems = []; 
 
   final TextEditingController _instructionController = TextEditingController();
   final TextEditingController _estimatedPriceController = TextEditingController();
   final TextEditingController _shopLocationController = TextEditingController();
   final TextEditingController _userLocationController = TextEditingController();
+  final TextEditingController itemController = TextEditingController();
+  final TextEditingController qtyController = TextEditingController();
 
   // ignore: unused_field
   int _characterCount = 0;
   final int _maxCharacterCount = 90;
+
+  @override
+  void dispose() {
+    itemController.dispose();
+    qtyController.dispose();
+    _instructionController.dispose();
+    _estimatedPriceController.dispose();
+    _shopLocationController.dispose();
+    _userLocationController.dispose();
+    super.dispose();
+  }
 
 
   @override
@@ -170,6 +191,7 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
                         children: [
                           Expanded(
                             child: TextFormField(
+                              controller: itemController,
                               decoration: InputDecoration(
                                 fillColor: Colors.white,
                                 filled: true,
@@ -183,6 +205,10 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
                                   borderSide: BorderSide.none,
                                 ),
                               ),
+                              onChanged: (value) {
+                                // You can access the inputted text using the 'value' parameter
+                                // Do something with the input, if needed
+                              },
                             ),
                           ),
                           const SizedBox(
@@ -191,6 +217,8 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
                           SizedBox(
                             width: 60,
                             child: TextFormField(
+                              controller: qtyController,
+                              keyboardType: TextInputType.number,
                               decoration: InputDecoration(
                                 fillColor: Colors.white,
                                 filled: true,
@@ -204,6 +232,10 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
                                   borderSide: BorderSide.none,
                                 ),
                               ),
+                              onChanged: (value) {
+                                // You can access the inputted text using the 'value' parameter
+                                // Do something with the input, if needed
+                              },
                             ),
                           ),
                         ],
@@ -222,6 +254,12 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
                         ElevatedButton(
                           onPressed: () {
                             setState(() {
+                              String item = itemController.text;
+                              String qty = qtyController.text;
+                              if (item.isNotEmpty && qty.isNotEmpty) {
+                                PabiliItem pabiliItem = PabiliItem(itemName: item, quantity: int.parse(qty));
+                                pabiliItems.add(pabiliItem);
+                              }
                               containers.add(
                                 Container(
                                   padding: const EdgeInsets.only(top: 5),
@@ -329,7 +367,7 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
                 ),
                 child: Column(
                   children: [
-                    TextField(
+                    TextFormField(
                       controller: _instructionController,
                       maxLength: _maxCharacterCount,
                       maxLines: 4,
@@ -420,11 +458,11 @@ class _PabiliHomePageState extends State<PabiliHomePage> {
                           // The estimated price is valid
                           // Do something with the estimated price, e.g. save it to a database or display it to the user
                           Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const DeliveryConfirmation(),
-                          ),
-                        );
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DeliveryConfirmation(pabiliItems: pabiliItems, instructionController: _instructionController,),
+                            ),
+                          );
                         }
                       },
                       style: ElevatedButton.styleFrom(

@@ -65,6 +65,29 @@ class _SearchPlacesPageState extends State<SearchPlacesPage> {
     }
   }
 
+  void getCoordinates(String input) async {
+    String placeApiKkey = 'AIzaSyD9botu4RRAG4Z8Sob0yti5OQY6ZCKnqMU';
+
+    try{
+      String baseURL =
+          'https://maps.googleapis.com/maps/api/geocode/json?key=API_KEY&place_id=PLACE_ID';
+      String request = '$baseURL?key=$placeApiKkey&place_parameter->place_id';
+      var response = await http.get(Uri.parse(request));
+      var data = json.decode(response.body);
+      print('mydata');
+      print(data);
+      if (response.statusCode == 200) {
+        setState(() {
+          _placeList = json.decode(response.body)['predictions'];
+        });
+      } else {
+        throw Exception('Failed to load predictions');
+      }
+    }catch(e){
+     // toastMessage('success');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -121,7 +144,9 @@ class _SearchPlacesPageState extends State<SearchPlacesPage> {
 
                       print(locations.last.longitude);
                       print(locations.last.latitude);
-                      // Update the controllers with the selected location
+                      
+                      getCoordinates(_placeList[index]['place_id']);
+
                       widget.locationController.text =
                           _placeList[index]['description'];
                       // Navigate back

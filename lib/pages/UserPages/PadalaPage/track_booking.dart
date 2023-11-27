@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:ui';
+
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -16,8 +18,8 @@ class PadalaTrackBookingPage extends StatefulWidget {
 class _PadalaTrackBookingPageState extends State<PadalaTrackBookingPage> {
   final Completer<GoogleMapController> _mapController = Completer();
 
-  static const LatLng driverLocation = LatLng(37.33500926, -122.03272188);
-  static const LatLng userLocation = LatLng(15.213688600000001, 120.6617605);
+  static const LatLng driverLocation = LatLng(15.1428163,-120.5943814);
+  static const LatLng userLocation = LatLng(15.1451258,-120.592064);
   static const CameraPosition cameraPosition = CameraPosition(
     target: driverLocation,
     zoom: 15.5,
@@ -182,19 +184,17 @@ class _PadalaTrackBookingPageState extends State<PadalaTrackBookingPage> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) =>
-                                          const HomePage(),
+                                      builder: (context) => const HomePage(),
                                     ),
                                   );
                                 },
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFFEDEDED),
-                                  foregroundColor: const Color.fromARGB(223, 255, 53, 53),
+                                  primary: const Color(0xFFEDEDED),
+                                  onPrimary: const Color.fromARGB(223, 255, 53, 53),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 40, vertical: 10),
+                                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                                 ),
                                 child: Text(
                                   'Delivery Received',
