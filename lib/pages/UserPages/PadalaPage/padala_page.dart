@@ -39,6 +39,12 @@ class _PadalaHomePageState extends State<PadalaHomePage> {
     'Electronics',
     'Others',
   ];
+
+  @override
+  void dispose() {
+    _userLocationController.dispose();
+    super.dispose();
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -465,11 +471,12 @@ class _PadalaHomePageState extends State<PadalaHomePage> {
                   children: [
                     ElevatedButton(
                       onPressed: () {
+                        String userLocation = _userLocationController.text;
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                const PadalaConfirmation(),
+                                PadalaConfirmation(userLocation: userLocation),
                           ),
                         );
                       },

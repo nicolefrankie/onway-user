@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:onway_user/pages/UserPages/PadalaPage/track_booking.dart';
 
+
 class PadalaConfirmation extends StatefulWidget {
-  const PadalaConfirmation({super.key});
+  final String userLocation;
+
+  const PadalaConfirmation({required this.userLocation, super.key});
 
   @override
   State<PadalaConfirmation> createState() => _PadalaConfirmationState();
 }
 
 class _PadalaConfirmationState extends State<PadalaConfirmation> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -185,7 +187,7 @@ class _PadalaConfirmationState extends State<PadalaConfirmation> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              const PadalaTrackBookingPage(),
+                                              PadalaTrackBookingPage(userLocation: widget.userLocation),
                                         ),
                                       );
                                     },

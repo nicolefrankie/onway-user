@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
-
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,9 +8,12 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:onway_user/pages/UserPages/PadalaPage/padala_page.dart';
 import 'package:onway_user/pages/UserPages/home_page.dart';
+import 'package:http/http.dart' as http;
 
 class PadalaTrackBookingPage extends StatefulWidget {
-  const PadalaTrackBookingPage({super.key});
+  final String userLocation;
+
+  const PadalaTrackBookingPage({required this.userLocation, super.key});
 
   @override
   State<PadalaTrackBookingPage> createState() => _PadalaTrackBookingPageState();
@@ -19,8 +22,11 @@ class PadalaTrackBookingPage extends StatefulWidget {
 class _PadalaTrackBookingPageState extends State<PadalaTrackBookingPage> {
   final Completer<GoogleMapController> _mapController = Completer();
 
-  static const LatLng driverLocation = LatLng(15.1428163,-120.5943814);
-  static const LatLng userLocation = LatLng(15.1451258,-120.592064);
+  static const LatLng driverLocation = LatLng(16.043493,120.3301977);
+  static const LatLng userLocation = LatLng(16.043067,120.336524);
+
+  double? userLat;
+  double? userLng;
   static const CameraPosition cameraPosition = CameraPosition(
     target: driverLocation,
     zoom: 15.5,
@@ -28,25 +34,52 @@ class _PadalaTrackBookingPageState extends State<PadalaTrackBookingPage> {
 
   @override
   void initState() {
-    getPolyPoints();
     super.initState();
+    getPolyPoints();
   }
 
   List<LatLng> polylineCoordinates = [];
   void getPolyPoints() async {
-    PolylinePoints polylinePoints = PolylinePoints();
-  PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      'AIzaSyD9botu4RRAG4Z8Sob0yti5OQY6ZCKnqMU', // Your Google Map Key
-      PointLatLng(driverLocation.latitude, driverLocation.longitude),
-      PointLatLng(userLocation.latitude, userLocation.longitude),
-    );
-  if (result.points.isNotEmpty) {
-      result.points.forEach(
-        (PointLatLng point) => polylineCoordinates.add(
-          LatLng(point.latitude, point.longitude),
-        ),
-      );
-      setState(() {});
+    String placeApiKkey = 'AIzaSyD9botu4RRAG4Z8Sob0yti5OQY6ZCKnqMU';
+    String address = widget.userLocation;
+
+    try{
+      String baseURL =
+          'https://maps.googleapis.com/maps/api/geocode/json';
+      String request = '$baseURL?address=$address&key=$placeApiKkey';
+      var response = await http.get(Uri.parse(request));
+      var data = json.decode(response.body);
+      print('mydata');
+      print(data);
+      if (response.statusCode == 200) {
+        PolylinePoints polylinePoints = PolylinePoints();
+        PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
+          'AIzaSyD9botu4RRAG4Z8Sob0yti5OQY6ZCKnqMU', // Your Google Map Key
+          PointLatLng(driverLocation.latitude, driverLocation.longitude),
+          PointLatLng(data.results[0].geometry.location.lat, data.results[0].geometry.location.lng),
+        );
+        if (result.points.isNotEmpty) {
+          result.points.forEach(
+            (PointLatLng point) => polylineCoordinates.add(
+              LatLng(point.latitude, point.longitude),
+            ),
+          );
+          setState(() {
+            userLat = data.results[0].geometry.location.lat;
+            userLng = data.results[0].geometry.location.lng;
+
+            print('userLat');
+            print(userLat);
+
+            print('userLng');
+            print(userLng);
+          });
+        }
+      } else {
+        throw Exception('Failed to load predictions');
+      }
+    }catch(e){
+     // toastMessage('success');
     }
   }
 
@@ -61,11 +94,11 @@ class _PadalaTrackBookingPageState extends State<PadalaTrackBookingPage> {
                 _mapController.complete(controller);
               },
               markers: {
-                const Marker(
+                Marker(
                   markerId: MarkerId("driverLocation"),
                   position: driverLocation,
                 ),
-                const Marker(
+                Marker(
                   markerId: MarkerId("userLocation"),
                   position: userLocation,
                 ),
