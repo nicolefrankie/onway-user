@@ -1,7 +1,10 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:onway_user/Pages/UserPages/home_page.dart';
 import 'package:onway_user/widgets/images.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class UserInformation extends StatefulWidget {
   const UserInformation({Key? key});
@@ -31,6 +34,46 @@ class _UserInformationState extends State<UserInformation> {
     super.initState();
     _passwordVisible = false;
   }
+
+  // final String baseURL = "";
+
+  // Future<void> registerUser({
+  //   required String firstName,
+  //   required String lastName,
+  //   required String email,
+  //   required String phoneNumber,
+  //   required String password,
+  // }) async {
+  //   final response = await http.post(
+  //     Uri.parse('http://192.168.100.121/register.php'), // Replace with your server URL
+  //     body: {
+  //       'firstName': firstName,
+  //       'lastName': lastName,
+  //       'email': email,
+  //       'phoneNumber': phoneNumber,
+  //       'password': password,
+  //     },
+  //   );
+
+  //   if (response.statusCode == 200) {
+  //     // Registration successful
+  //     print('Registration Successful');
+  //   } else {
+  //     // Registration failed
+  //     print('Registration Failed');
+  //   }
+  // }
+
+  @override
+  void dispose() {
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _emailController.dispose();
+    _phoneNumberController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {

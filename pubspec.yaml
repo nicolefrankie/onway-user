@@ -50,6 +50,8 @@ dependencies:
   flutter_google_maps_webservices: ^1.1.1
   uuid: ^4.2.1
   shared_preferences: ^2.2.2
+  dio: ^5.3.4
+  fluttertoast: ^8.2.4
 
 
 

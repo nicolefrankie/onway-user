@@ -1,10 +1,15 @@
+// import 'dart:convert';
+
 import 'package:flutter/material.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:onway_user/Pages/UserPages/SignUpPage/user_info.dart';
-import 'package:onway_user/Pages/UserPages/home_page.dart';
+import 'package:onway_user/pages/UserPages/home_page.dart';
+// import 'package:onway_user/Pages/UserPages/home_page.dart';
 
 import 'package:onway_user/widgets/images.dart';
 import 'package:onway_user/Components/forgot_password.dart';
+// import 'package:http/http.dart' as http;
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -24,6 +29,35 @@ class _SignInState extends State<SignIn> {
     super.initState();
     _passwordVisible = false;
   }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
+//   Future<void> login(BuildContext context) async {
+//   var url = Uri.parse('http://192.168.100.121/register.php');
+//   var response = await http.post(url, body: {
+//     "email": _emailController.text,
+//     "password": _passwordController.text
+//   });
+
+//   var data = json.decode(response.body);
+
+//   if (data == "success") {
+    
+//   } else {
+//     Fluttertoast.showToast(
+//       msg: "The email and password don't match",
+//       toastLength: Toast.LENGTH_SHORT,
+//       gravity: ToastGravity.CENTER,
+//       fontSize: 16,
+//     );
+//   }
+// }
+
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +96,7 @@ class _SignInState extends State<SignIn> {
                     ),
                     TextFormField(
                       controller: _emailController,
-                      keyboardType: TextInputType.text,
+                      keyboardType: TextInputType.emailAddress,
                       cursorColor: const Color.fromARGB(255, 0, 0, 0),
                       decoration: InputDecoration(
                         border: OutlineInputBorder(

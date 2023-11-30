@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:onway_user/pages/UserPages/PabiliPages/pabili_page.dart';
 import 'package:onway_user/pages/UserPages/home_page.dart';
 
 class PabiliTrackBookingPage extends StatefulWidget {
@@ -16,8 +17,8 @@ class PabiliTrackBookingPage extends StatefulWidget {
 class _PabiliTrackBookingPageState extends State<PabiliTrackBookingPage> {
   final Completer<GoogleMapController> _mapController = Completer();
 
-  static const LatLng driverLocation = LatLng(15.1428163,-120.5943814);
-  static const LatLng userLocation = LatLng(15.1451258,-120.592064);
+  static const LatLng driverLocation = LatLng(16.043493,120.3301977);
+  static const LatLng userLocation = LatLng(16.043067,120.336524);
   static const CameraPosition cameraPosition = CameraPosition(
     target: driverLocation,
     zoom: 15.5,
@@ -158,12 +159,40 @@ class _PabiliTrackBookingPageState extends State<PabiliTrackBookingPage> {
                             children: [
                               ElevatedButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          const HomePage(),
-                                    ),
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: const Text('Delivery Received'),
+                                        content: const Text('The delivery driver has delivered your items!'),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const PabiliHomePage(),
+                                                ),
+                                              );
+                                            },
+                                            child: const Text('Book Deliver'),
+                                          ),
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const HomePage(),
+                                                ),
+                                              );
+                                            },
+                                            child: const Text('Go Home'),
+                                          ),
+                                        ],
+                                      );
+                                    },
                                   );
                                 },
                                 style: ElevatedButton.styleFrom(
