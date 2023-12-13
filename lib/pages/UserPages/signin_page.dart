@@ -1,5 +1,7 @@
 // import 'dart:convert';
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 // import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,7 +11,7 @@ import 'package:onway_user/pages/UserPages/home_page.dart';
 
 import 'package:onway_user/widgets/images.dart';
 import 'package:onway_user/Components/forgot_password.dart';
-// import 'package:http/http.dart' as http;
+import 'package:http/http.dart' as http;
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -36,6 +38,50 @@ class _SignInState extends State<SignIn> {
     _passwordController.dispose();
     super.dispose();
   }
+
+  // Future<void> login() async {
+  //   final email = _emailController.text;
+  //   final password = _passwordController.text;
+
+  //   final apiUrl = 'http://192.168.100.121:8000/api/customers/$email&$password';
+
+  //   try {
+  //     final response = await http.post(Uri.parse(apiUrl));
+
+  //     if (response.statusCode == 200) {
+  //       final data = json.decode(response.body);
+
+  //       Navigator.push(
+  //         context,
+  //         MaterialPageRoute(
+  //           builder: (context) => HomePage(),
+  //         ),
+  //       );
+  //     } else {
+  //       // Handle error cases
+  //       showDialog(
+  //         context: context,
+  //         builder: (BuildContext context) {
+  //           return AlertDialog(
+  //             title: Text('Error'),
+  //             content: Text('User Account Not Found'),
+  //             actions: <Widget>[
+  //               TextButton(
+  //                 child: Text('OK'),
+  //                 onPressed: () {
+  //                   Navigator.of(context).pop();
+  //                 },
+  //               ),
+  //             ],
+  //           );
+  //         },
+  //       );
+  //     }
+  //   } catch (e) {
+  //     print('Error $e');
+  //     // Handle other exceptions as needed
+  //   }
+  // }
 
 //   Future<void> login(BuildContext context) async {
 //   var url = Uri.parse('http://192.168.100.121/register.php');
@@ -182,6 +228,7 @@ class _SignInState extends State<SignIn> {
               ),
 
               ElevatedButton(
+                // onPressed: login,
                 onPressed: () {
                   Navigator.push(
                     context,

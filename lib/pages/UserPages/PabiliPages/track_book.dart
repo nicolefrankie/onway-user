@@ -142,6 +142,20 @@ class _PabiliTrackBookingPageState extends State<PabiliTrackBookingPage> {
                           Align(
                             alignment: Alignment.topLeft,
                               child: Text(
+                                "Km: ",
+                                style: GoogleFonts.notoSans(
+                                  fontSize: 11,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black,
+                                ),
+                              ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Align(
+                            alignment: Alignment.topLeft,
+                              child: Text(
                                 "Delivery Fee: ",
                                 style: GoogleFonts.notoSans(
                                   fontSize: 11,

@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:onway_user/Pages/UserPages/home_page.dart';
@@ -35,35 +34,6 @@ class _UserInformationState extends State<UserInformation> {
     _passwordVisible = false;
   }
 
-  // final String baseURL = "";
-
-  // Future<void> registerUser({
-  //   required String firstName,
-  //   required String lastName,
-  //   required String email,
-  //   required String phoneNumber,
-  //   required String password,
-  // }) async {
-  //   final response = await http.post(
-  //     Uri.parse('http://192.168.100.121/register.php'), // Replace with your server URL
-  //     body: {
-  //       'firstName': firstName,
-  //       'lastName': lastName,
-  //       'email': email,
-  //       'phoneNumber': phoneNumber,
-  //       'password': password,
-  //     },
-  //   );
-
-  //   if (response.statusCode == 200) {
-  //     // Registration successful
-  //     print('Registration Successful');
-  //   } else {
-  //     // Registration failed
-  //     print('Registration Failed');
-  //   }
-  // }
-
   @override
   void dispose() {
     _firstNameController.dispose();
@@ -74,6 +44,37 @@ class _UserInformationState extends State<UserInformation> {
     super.dispose();
   }
 
+  Future<void> registerUser() async {
+    final String apiUrl = "http://192.168.100.121:8000/api/customer/register";
+
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      body: {
+        "firstName": _firstNameController.text,
+        "lastName": _lastNameController.text,
+        "email": _emailController.text,
+        "phoneNumber": _phoneNumberController.text,
+        "password": _passwordController.text,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      // Registration successful, handle the response as needed
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => HomePage(),
+          ),
+        );
+      print(response.body);
+    } else {
+      // Registration failed, handle the error
+      print("Registration failed");
+      print(response.statusCode);
+      print(response.body);
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -374,16 +375,20 @@ class _UserInformationState extends State<UserInformation> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        if (_formKey.currentState?.validate() == true) {
-                          // If the form is valid, navigate to the next page
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const HomePage(),
-                            ),
-                          );
-                        }
+                        registerUser();
                       },
+                      // onPressed: () {
+                      //   if (_formKey.currentState?.validate() == true) {
+                      //     // If the form is valid, navigate to the next page
+                      //     // Navigator.push(
+                      //     //   context,
+                      //     //   MaterialPageRoute(
+                      //     //     builder: (context) => const HomePage(),
+                      //     //   ),
+                      //     // );
+                      //     registerUser();
+                      //   }
+                      // },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromARGB(223, 255, 53, 53),
                         shape: RoundedRectangleBorder(
